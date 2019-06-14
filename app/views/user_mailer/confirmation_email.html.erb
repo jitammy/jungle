@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Thank you for your order, <%= @order.email %>!</h2>
+    <h4>For your convenience, here are the details of your order.</h4>
+    <hr>
+    <% @order_items.each do |item| %>
+      <strong>Product:</strong> <%= item.product.name %>
+      <strong>Description:</strong> <%= item.product.description %>
+      <strong>Item Price:</strong> &#36;<%= item.item_price %>
+      <strong>Quantity:</strong> <%= item.quantity %>
+      <strong>Total Price:</strong> &#36;<%= item.total_price %>
+      <hr>
+    <% end %>
+    <% order_total = 0 %>
+      <% @order_items.each do |item| %>
+        <% order_total += item.total_price %>
+      <% end %>
+      <h5>YOUR ORDER TOTAL: &#36;<%= order_total %></h5>
+  </body>

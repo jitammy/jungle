@@ -30,15 +30,13 @@
 
       <ul class="nav navbar-nav navbar-right">
 
-
       <li style="display: flex; line-height: 50px;">
           <% if current_user %>
            <%= link_to "Logout", '/logout' %> Signed in as <%= current_user.first_name %>
           <% else %>
             <%= link_to 'Login', '/login' %>  <%= link_to 'Signup', '/signup' %>
           <% end %>
-        </li>
-
+      </li>
       
 
        <li class="dropdown">
