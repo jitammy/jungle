@@ -1,0 +1,34 @@
+<h1>Signup</h1>
+<table>
+<%= form_for :user, url: '/users' do |form| %>
+
+<tr>
+<th><%= form.label :firstname %></th>
+<th><%= form.text_field :first_name %></th>
+</tr>
+  
+<tr>
+<th><%= form.label :lastname %></th>
+<th><%= form.text_field :last_name %></th>
+</tr>
+  
+<tr>
+<th><%= form.label :email %></th>
+<th><%= form.text_field :email %></th>
+</tr>
+
+<tr>
+<th><%= form.label :password %></th>
+<th><%= form.password_field :password %></th>
+</tr>
+ 
+<tr>
+<th><%= form.label :confirmpassword %></th>
+<th><%= form.password_field :password_confirmation %></th>
+</tr>
+
+</table>
+
+<th><%= form.submit "Create", class: "btn btn-primary" %></th>
+
+<% end %>

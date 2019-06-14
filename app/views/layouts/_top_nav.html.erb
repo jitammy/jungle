@@ -9,6 +9,7 @@
       </button>
       <a class="navbar-brand" href="/">Jungle</a>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -26,7 +27,20 @@
           </ul>
         </li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
+
+
+      <li style="display: flex; line-height: 50px;">
+          <% if current_user %>
+           <%= link_to "Logout", '/logout' %> Signed in as <%= current_user.first_name %>
+          <% else %>
+            <%= link_to 'Login', '/login' %>  <%= link_to 'Signup', '/signup' %>
+          <% end %>
+        </li>
+
+      
+
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
@@ -39,11 +53,13 @@
             <li><%= link_to 'Categories',  [:admin, :categories] %></li>
           </ul>
         </li>
+
         <li>
           <%= link_to cart_path do %>
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
+
       </ul>
     </div>
   </div>
