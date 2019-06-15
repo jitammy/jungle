@@ -41,22 +41,27 @@
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-amount="<%= cart_subtotal_cents %>"
           data-name="Jungle"
-          data-description="<%= current_user.first_name%>'s Jungle Order"
+          <% if current_user %>
+          
+          data-description="<%= current_user.first_name %>s' Jungle Order"
           data-locale="auto"
-          data-email=<%= current_user.email%>
+          data-email="<%= current_user.email%>"
+
+          <% end %>
           data-currency="cad">
         </script>
       <% end %>
     </div>
   </div>
 
-  <%else%>
+  <% else%>
  <h3>Your Cart is Empty! Please Continue Shopping/h3>
   
   <%= link_to root_path do %>
   <h4>HOME</h4>
   <%end%>
   <%end%>
+
 
 
 </section>

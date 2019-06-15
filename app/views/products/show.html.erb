@@ -6,7 +6,6 @@
   </header>
 
   <article class="product-detail">
-
     <div class="row">
 
       <div class="col-sm-4">
@@ -33,13 +32,12 @@
             <%= form_for [@product, @review], url: `/products/#{@product.id}/reviews` do |f| %>
 
             <div class="form-fields">
-
-              Rate Product:
+              Choose rating:
               <%= f.select :rating, options_for_select([['5 stars: good', 5],['4 stars: ok', 4] , ['3 stars: meh', 3], ['2 stars: wouldnt buy', 2], ['1 star: just ewwwwww', 1]] ) %>
             </div>
             <br>
             <div class="form-fields">
-              Write Review: <%= f.text_area :description, :required => true %>
+              Review details: <%= f.text_area :description, :required => true %>
             </div>
 
             <br>
@@ -50,21 +48,33 @@
 
             <% end %>
           </div>
-
-          <% end %>
+          
           <hr>
           <div class="row">
             <h4 class="review-header">Reviews</h4>
-            <% @rs = @product.reviews.sort_by {|i| [-i[:rating]]}%>
+            <% @rs = @product.reviews.sort_by {|i| [i[:created_at]]}.reverse%>
             <% @rs.each do |d| %>
+
             <dt><%= d.rating %> Stars</dt>
             <dd><%= d.description %></dd>
+
+            <dd>Reviewed at <%= d.created_at.to_s %> by User <%= d.user_id %></dd>
+
+            <% if d.user_id == current_user.id %>
+            <%= javascript_include_tag :all %>
+            <dd>
+              <%= link_to fa_icon('trash'), product_review_path(@product, d), data: {:confirm => 'Are you sure?'}, :method => :delete %>
+            </dd>
+            <% end %>
             <% end %>
           </div>
+          <% else %>
+            <h4>Please <a
+                href="/login">login</a> or <a href="/signup">register</a> for view/write review!</h4>
+          <% end %>
         </dl>
       </div>
     </div>
-
   </article>
 
 </section>
