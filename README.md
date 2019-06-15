@@ -11,7 +11,7 @@ A mini e-commerce application built with Rails 4.2 PostgreSQL as database.
 5. Open http://localhost:3000 on your browser
 
 !["1"](https://github.com/jitammy/jungle-rails/blob/master/screenshots/main.png)
-!["2"]()
+!["2"](https://github.com/jitammy/jungle-rails/blob/master/screenshots/cart.png)
 !["3"](https://github.com/jitammy/jungle-rails/blob/master/screenshots/Order.png)
 !["4"](https://github.com/jitammy/jungle-rails/blob/master/screenshots/orderconfirm.png)
 !["5"](https://github.com/jitammy/jungle-rails/blob/master/screenshots/emptycart.png)
