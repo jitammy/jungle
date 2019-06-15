@@ -1,7 +1,8 @@
 <section class="products-show">
 
   <header class="page-header">
-    <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
+    <h1><%= link_to @product.category.name, @product.category %> &raquo;
+      <%= @product.name %></h1>
   </header>
 
   <article class="product-detail">
@@ -22,6 +23,44 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+
+          <hr>
+          <% if current_user %>
+          <div class="row">
+            <h4 class="review-header">Write Review</h4>
+
+            <br>
+            <%= form_for [@product, @review], url: `/products/#{@product.id}/reviews` do |f| %>
+
+            <div class="form-fields">
+
+              Rate Product:
+              <%= f.select :rating, options_for_select([['5 stars: good', 5],['4 stars: ok', 4] , ['3 stars: meh', 3], ['2 stars: wouldnt buy', 2], ['1 star: just ewwwwww', 1]] ) %>
+            </div>
+            <br>
+            <div class="form-fields">
+              Write Review: <%= f.text_area :description, :required => true %>
+            </div>
+
+            <br>
+
+            <div class="form-fields">
+              <%= f.submit "Submit" %>
+            </div>
+
+            <% end %>
+          </div>
+
+          <% end %>
+          <hr>
+          <div class="row">
+            <h4 class="review-header">Reviews</h4>
+            <% @rs = @product.reviews.sort_by {|i| [-i[:rating]]}%>
+            <% @rs.each do |d| %>
+            <dt><%= d.rating %> Stars</dt>
+            <dd><%= d.description %></dd>
+            <% end %>
+          </div>
         </dl>
       </div>
     </div>

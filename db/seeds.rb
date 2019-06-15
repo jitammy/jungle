@@ -28,6 +28,7 @@ puts "Finding or Creating Categories ..."
 cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
 cat3 = Category.find_or_create_by! name: 'Furniture'
+user1 = User.find_or_create_by! first_name: 'tammy', last_name: 'ji' ,email: 'email@email.com', password_digest: '12345678'
 
 ## PRODUCTS
 
@@ -35,7 +36,7 @@ puts "Re-creating Products ..."
 
 Product.destroy_all
 
-cat1.products.create!({
+pro1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
@@ -130,6 +131,13 @@ cat3.products.create!({
   image: open_asset('furniture3.jpg'),
   quantity: 23,
   price: 2_483.75
+})
+
+pro1.reviews.create!({
+  user: user1,
+  description: "Very good!",
+  rating: 5
+
 })
 
 
