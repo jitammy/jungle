@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+
   describe 'Validations' do
     before do
       @user = User.new
@@ -60,8 +61,7 @@ RSpec.describe User, type: :model do
       @user.password_confirmation = nil
       @user.save
       expect(@user.errors.full_messages[0]).to include(@user.errors[:password_confirmation][0])
-      puts @user.errors.full_messages
-      puts @user.errors[:password_confirmation]
+     
 
     end
 
@@ -70,21 +70,37 @@ RSpec.describe User, type: :model do
   describe '.authenticate_with_credentials' do
 
     before do
-      @user = User.new
-      @user.first_name = "someone"
-      @user.last_name = "someone"
-      @user.email = "someone@gmail.com"
-      @user.password = "someone"
-      @user.password_confirmation = "someone"
+      @user1 = User.new
+      @user1.first_name = "someone1"
+      @user1.last_name = "someone1"
+      @user1.email = "someone1@gmail.com"
+      @user1.password = "someone1"
+      @user1.password_confirmation = "someone1"
+      @user1.save
     end
 
     it 'should get right user if password match' do
+      aspirational_user = User.authenticate_with_credentials("someone1@gmail.com", "someone1")
+      expect(aspirational_user).to eq(@user1)
+    end
+    it 'should get no user if password not match' do
+      aspirational_user = User.authenticate_with_credentials("someone1@gmail.com", "someone2")
+      expect(aspirational_user).to_not eq(@user1)
+    end
 
-      # aspirational_user = User.authenticate_with_credentials("someone@gmail.com", "someone")
-      # puts aspirational_user
-      # puts @user
-      # expect(aspirational_user).to eq(@user)
+    it 'should get no user if email not match' do
+      aspirational_user = User.authenticate_with_credentials("someone2@gmail.com", "someone1")
+      expect(aspirational_user).to_not eq(@user1)
+    end
 
+    it 'should get user if email has space at begining' do
+      aspirational_user = User.authenticate_with_credentials(" someone1@gmail.com ", "someone1")
+      expect(aspirational_user).to eq(@user1)
+    end
+
+    it 'should get user if email has uppsercase' do
+      aspirational_user = User.authenticate_with_credentials("SOMEONE1@GMAIL.CoM", "someone1")
+      expect(aspirational_user).to eq(@user1)
     end
 
   end
