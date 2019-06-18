@@ -20,24 +20,31 @@ require 'rails_helper'
       @product.name = nil
       @product.save
       expect(@product.errors.full_messages[0]).to include(@product.errors[:name][0])
+
     end
 
      it 'shouldnt have an empty price' do
       @product.price_cents = nil
       @product.save
-      expect(@product.errors.full_messages[1]).to include(@product.errors[:price][0])
+      expect(@product.errors.full_messages[0]).to include(@product.errors[:price][0])
+
+
     end
 
      it 'shouldnt have an empty quantity' do
       @product.quantity = nil
       @product.save
       expect(@product.errors.full_messages[0]).to include(@product.errors[:quantity][0])
+
+
     end
 
      it 'shouldnt have an empty category' do
       @product.category_id = nil
       @product.save
       expect(@product.errors.full_messages[0]).to include(@product.errors[:category][0])
+
+
     end
 
    end
